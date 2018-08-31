@@ -1,12 +1,14 @@
+import { ErrorObject } from 'ajv';
+
 /* eslint-disable
   strict,
   no-param-reassign
 */
 
-'use strict';
-
-class ValidationError extends Error {
-  constructor(errors, name) {
+export default class ValidationError extends Error {
+  name: string;
+  errors: ErrorObject[];
+  constructor(errors: ErrorObject[], name: string) {
     super();
 
     this.name = 'ValidationError';
@@ -26,5 +28,3 @@ class ValidationError extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-
-module.exports = ValidationError;

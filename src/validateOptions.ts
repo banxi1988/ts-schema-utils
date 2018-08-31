@@ -2,17 +2,14 @@
   strict,
   no-param-reassign
 */
+import fs from 'fs';
+import path from 'path';
 
-'use strict';
+import Ajv from 'ajv';
+import errors from 'ajv-errors';
+import keywords from 'ajv-keywords';
 
-const fs = require('fs');
-const path = require('path');
-
-const Ajv = require('ajv');
-const errors = require('ajv-errors');
-const keywords = require('ajv-keywords');
-
-const ValidationError = require('./ValidationError');
+import ValidationError from './ValidationError';
 
 const ajv = new Ajv({
   allErrors: true,
@@ -22,17 +19,17 @@ const ajv = new Ajv({
 errors(ajv);
 keywords(ajv, ['instanceof', 'typeof']);
 
-const validateOptions = (schema, options, name) => {
+const validateOptions = (schema: any, options: any, name: string) => {
   if (typeof schema === 'string') {
     schema = fs.readFileSync(path.resolve(schema), 'utf8');
     schema = JSON.parse(schema);
   }
 
   if (!ajv.validate(schema, options)) {
-    throw new ValidationError(ajv.errors, name);
+    throw new ValidationError(ajv.errors || [], name);
   }
 
   return true;
 };
 
-module.exports = validateOptions;
+export = validateOptions;

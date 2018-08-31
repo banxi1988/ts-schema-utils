@@ -6,7 +6,7 @@
 
 'use strict';
 
-const validateOptions = require('../src');
+const validateOptions = require('../dist');
 
 test('Valid', () => {
   const options = {

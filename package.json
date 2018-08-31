@@ -1,10 +1,11 @@
 {
-  "name": "schema-utils",
+  "name": "ts-schema-utils",
   "version": "1.0.0",
   "description": "webpack Validation Utils",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
-    "src"
+    "dist"
   ],
   "engines": {
     "node": ">= 4"
@@ -12,6 +13,7 @@
   "scripts": {
     "lint": "eslint --cache src test",
     "test": "jest --env node --verbose --coverage",
+    "pretest": "tsc",
     "clean": "del-cli coverage",
     "commits": "commitlint --from $(git rev-list --tags --max-count=1)",
     "release": "npm run commits && standard-version"
@@ -25,6 +27,7 @@
     "@commitlint/cli": "^7.0.0",
     "@commitlint/config-conventional": "^7.0.0",
     "@webpack-contrib/eslint-config-webpack": "^2.0.0",
+    "@types/webpack": "^4.4.11",
     "del-cli": "^1.0.0",
     "eslint": "^5.0.0",
     "eslint-plugin-import": "^2.0.0",
